@@ -1,17 +1,14 @@
-# Stripe for Apollo and Meteor
-
-- Install package
-
-```
-meteor add orionsoft:stripe-graphql
-```
-
-- Add ```stripeSecretKey``` to Meteor settings
-
-- Import
+# Banco de Chile payments notifications
 
 ```js
-import 'meteor/orionsoft:stripe-graphql'
-```
+import {startWatching} from 'meteor/orionsoft:banco-chile-notifications'
 
-- Check the docs in Graphiql
+startWatching({
+  rut: process.env.BANCO_CHILE_RUT,
+  userRut: process.env.BANCO_CHILE_USER_RUT,
+  password: process.env.BANCO_CHILE_PASSWORD,
+  callback: payment => {
+    console.log('new payment', payment)
+  }
+})
+```
