@@ -1,8 +1,6 @@
 import moment from 'moment'
 import parseBankAccount from './parseBankAccount'
-/* global Npm */
-
-const cheerio = Npm.require('cheerio')
+import cheerio from 'cheerio'
 
 export default function(data) {
   const $ = cheerio.load(data)
