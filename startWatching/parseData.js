@@ -58,7 +58,7 @@ export default function(data) {
       hashes[hash] = hashes[hash] ? hashes[hash] + 1 : 1
       const index = hashes[hash]
       return Object.assign({}, payment, {
-        hash: hash + '..' + index,
+        hash: index + '.' + hash,
         index
       })
     })
