@@ -27,7 +27,5 @@ export default function({cookies}) {
     }
   })
 
-  console.log(result.content)
-
   return result.content
 }
