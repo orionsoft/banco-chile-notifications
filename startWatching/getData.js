@@ -6,7 +6,7 @@ export default function({cookies}) {
   const postData = querystring.stringify({
     accion: 'buscarOperaciones',
     initDate: moment()
-      .subtract(30, 'day')
+      .subtract(1, 'day')
       .format('DD/MM/YYYY'),
     endDate: moment().format('DD/MM/YYYY'),
     ctaCorriente: 'TODAS',

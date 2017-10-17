@@ -1,5 +1,6 @@
 import moment from 'moment'
 import parseBankAccount from './parseBankAccount'
+/* global Npm */
 
 const cheerio = Npm.require('cheerio')
 
@@ -43,12 +44,23 @@ export default function(data) {
           payment.approved = text === 'Aprobada'
         }
       })
-    if (payment.approved) {
-      const date = moment(payment.date).format('DD/MM/YYYY')
-      payment.hash = `${date}-${payment.origin}-${payment.originRut}-${payment.amount}`
-      payments.push(payment)
-    }
+    payments.push(payment)
   })
 
+  payments.reverse()
+
+  const hashes = {}
+
   return payments
+    .map(payment => {
+      const date = moment(payment.date).format('DD/MM/YYYY')
+      const hash = `${date}-${payment.origin}-${payment.originRut}-${payment.amount}`
+      hashes[hash] = hashes[hash] ? hashes[hash] + 1 : 1
+      const index = hashes[hash]
+      return Object.assign({}, payment, {
+        hash: hash + '..' + index,
+        index
+      })
+    })
+    .filter(payment => payment.approved)
 }
