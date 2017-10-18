@@ -3,7 +3,6 @@ import getData from './getData'
 import Payments from './Payments'
 import parseData from './parseData'
 import {Meteor} from 'meteor/meteor'
-import './test'
 
 const job = function({rut, userRut, password, callback}) {
   const cookies = getCookies({rut, userRut, password})

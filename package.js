@@ -2,7 +2,7 @@
 
 Package.describe({
   name: 'orionsoft:banco-chile-notifications',
-  version: '0.0.7',
+  version: '0.0.8',
   // Brief, one-line summary of the package.
   summary: 'Transactions notifications for Banco de Chile enterprise',
   // URL to the Git repository containing the source code for this package.
@@ -11,8 +11,6 @@ Package.describe({
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
 })
-
-Npm.depends({cheerio: '0.19.0'})
 
 Package.onUse(function(api) {
   api.versionsFrom('1.4.2.3')
