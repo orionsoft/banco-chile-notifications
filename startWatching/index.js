@@ -30,7 +30,7 @@ const runJob = function(params) {
   }
 }
 
-export default function({rut, userRut, password, callback, loopDuration = 5000}) {
+export default function({rut, userRut, password, callback, loopDuration = 30000}) {
   Meteor.defer(function() {
     while (true) {
       runJob({rut, userRut, password, callback, loopDuration})
