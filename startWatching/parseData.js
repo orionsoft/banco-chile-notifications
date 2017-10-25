@@ -10,7 +10,7 @@ export default function(data) {
   const payments = []
 
   lines.each(function(i, elem) {
-    const payment = {}
+    const payment = {createdAt: new Date()}
     $(this)
       .find('td')
       .each(function(i, elem) {
