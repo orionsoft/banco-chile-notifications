@@ -21,12 +21,13 @@ const job = function({rut, userRut, password, callback}) {
 const runJob = function(params) {
   try {
     while (true) {
-      Meteor._sleepForMs(params.loopDuration)
       job(params)
+      Meteor._sleepForMs(params.loopDuration)
     }
   } catch (error) {
     console.error('Error in banco de chile payments')
     console.error(error)
+    Meteor._sleepForMs(params.loopDuration)
   }
 }
 
