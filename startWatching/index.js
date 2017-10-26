@@ -1,13 +1,13 @@
-import getCookies from './getCookies'
 import getData from './getData'
 import Payments from './Payments'
 import parseData from './parseData'
 import {Meteor} from 'meteor/meteor'
 
 const job = function({rut, userRut, password, callback}) {
-  const cookies = getCookies({rut, userRut, password})
-  const data = getData({cookies})
+  const data = getData({rut, userRut, password})
+  if (!data) return
   const payments = parseData(data)
+  console.log(`fetched ${payments.length} payments from bchile`)
 
   for (const payment of payments) {
     const has = !!Payments.find({hash: payment.hash}).count()

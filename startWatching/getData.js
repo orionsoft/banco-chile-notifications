@@ -1,8 +1,9 @@
 import {HTTP} from 'meteor/http'
 import querystring from 'querystring'
 import moment from 'moment'
+import getCookies from './getCookies'
 
-export default function({cookies}) {
+const makeRequest = function({cookies}) {
   const postData = querystring.stringify({
     accion: 'buscarOperaciones',
     initDate: moment()
@@ -27,5 +28,26 @@ export default function({cookies}) {
     }
   })
 
+  if (!result.content.includes('div id="expoDato_child"')) {
+    console.log(result.content)
+    throw new Error('Error de contenido')
+  }
   return result.content
+}
+
+let cookies = null
+
+export default function({rut, userRut, password}) {
+  if (!cookies) {
+    console.log('Refetching bchile cookies')
+    cookies = getCookies({rut, userRut, password})
+  }
+
+  try {
+    return makeRequest({cookies})
+  } catch (error) {
+    cookies = null
+    console.error('BChile error:')
+    console.error(error)
+  }
 }
