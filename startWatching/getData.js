@@ -2,6 +2,7 @@ import {HTTP} from 'meteor/http'
 import querystring from 'querystring'
 import moment from 'moment'
 import getCookies from './getCookies'
+import {Meteor} from 'meteor/meteor'
 
 const makeRequest = function({cookies}) {
   const postData = querystring.stringify({
@@ -41,6 +42,7 @@ export default function({rut, userRut, password}) {
   if (!cookies) {
     console.log('Refetching bchile cookies')
     cookies = getCookies({rut, userRut, password})
+    console.log('cookies', cookies)
   }
 
   try {
@@ -48,6 +50,7 @@ export default function({rut, userRut, password}) {
   } catch (error) {
     cookies = null
     console.error('BChile error:')
+    Meteor._sleepForMs(30 * 1000)
     console.error(error)
   }
 }
