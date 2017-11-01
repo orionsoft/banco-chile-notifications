@@ -30,7 +30,7 @@ const makeRequest = function({cookies}) {
   })
 
   if (!result.content.includes('div id="expoDato_child"')) {
-    console.log(result.content)
+    // console.log(result.content)
     throw new Error('Error de contenido')
   }
   return result.content
@@ -50,7 +50,7 @@ export default function({rut, userRut, password}) {
   } catch (error) {
     cookies = null
     console.error('BChile error:')
+    console.error(error.message)
     Meteor._sleepForMs(30 * 1000)
-    console.error(error)
   }
 }

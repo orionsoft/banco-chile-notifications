@@ -7,7 +7,6 @@ const job = function({rut, userRut, password, callback}) {
   const data = getData({rut, userRut, password})
   if (!data) return
   const payments = parseData(data)
-  console.log(`fetched ${payments.length} payments from bchile`)
 
   for (const payment of payments) {
     const has = !!Payments.find({hash: payment.hash}).count()
@@ -26,7 +25,7 @@ const runJob = function(params) {
     }
   } catch (error) {
     console.error('Error in banco de chile payments')
-    console.error(error)
+    console.error(error.message)
     Meteor._sleepForMs(params.loopDuration)
   }
 }
