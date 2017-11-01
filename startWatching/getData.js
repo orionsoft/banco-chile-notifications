@@ -29,8 +29,11 @@ const makeRequest = function({cookies}) {
     }
   })
 
-  if (!result.content.includes('div id="expoDato_child"')) {
-    // console.log(result.content)
+  if (
+    !result.content.includes('div id="expoDato_child"') &&
+    !result.content.includes('No hay transferencias para el criterio seleccionado.')
+  ) {
+    console.log(result.content)
     throw new Error('Error de contenido')
   }
   return result.content
